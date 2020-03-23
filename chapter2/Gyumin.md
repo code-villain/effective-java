@@ -299,7 +299,7 @@
 
 ### 정적 팩터리 메서드를 사용해 불필요한 객체 생성을 피할 수 있다
 
-- 생성자 대신 정적 팩터리 메서드를 제공하는 불변 클래스에서는 정적 팩터리 메서드를 사용해서 불필요한 객체 생성을 방지 ([아이템 2]() 참조)
+- 생성자 대신 정적 팩터리 메서드를 제공하는 불변 클래스에서는 정적 팩터리 메서드를 사용해서 불필요한 객체 생성을 방지 ([아이템 2](https://github.com/code-villain/effective-java/blob/master/chapter2/Gyumin.md#%EC%95%84%EC%9D%B4%ED%85%9C-2-%EC%83%9D%EC%84%B1%EC%9E%90%EC%97%90-%EB%A7%A4%EA%B0%9C%EB%B3%80%EC%88%98%EA%B0%80-%EB%A7%8E%EB%8B%A4%EB%A9%B4-%EB%B9%8C%EB%8D%94%EB%A5%BC-%EA%B3%A0%EB%A0%A4%ED%95%98%EB%9D%BC) 참조)
   - ex) `new Boolean(String)` 대신 `Boolean.valueOf(String)` 팩터리 메서드 사용
 - 팩터리 메서드는 생성자와는 달리 매번 새로운 객체를 만들지는 않는다.
 
@@ -444,4 +444,4 @@
 
 ---
 
-[↑ 맨 위로]()
+[↑ 맨 위로](https://github.com/code-villain/effective-java/blob/master/chapter2/Gyumin.md#2%EC%9E%A5-%EA%B0%9D%EC%B2%B4-%EC%83%9D%EC%84%B1%EA%B3%BC-%ED%8C%8C%EA%B4%B4)
