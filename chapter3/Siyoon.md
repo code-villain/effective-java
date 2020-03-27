@@ -69,6 +69,31 @@ Hash류의 컬렉션을 제대로 사용하기 위해서는 hashCode를 제대�
 ### clone
 객체 복사 메서드. 책에서는 배열 복사와 기존에 사용되고 있는 클래스를 수정하는  사용하라고 권고한다. 생성자나 정적 메서드르 통해서 복사하자.
 
+# item14) Comparable을 구현할지 고려하라
 
+## 정의
+### comparable 인터페이스
+comparable은 하나의 메서드 compareTo를 가지고 있다. compareTo는 순서를 비교하는줄 알았는데, equals()처럼 동치성도 비교할 수 있다. (반환값이 0인 경우 겠네)
+그래서 x.compareTO(y) == 0 이라면 x.equals(y)를 만족하는 방식으로 구현하는 것이 바람직하다. (이펙티브 자바 권고사항)
 
+compareTo 메서드를 제대로 선언하지 않는다면 Tree 컬렉션들과 제대로 어울리지 못한다.
 
+## compareTo 구현시 고려사항
+1. - , < , > 연산자를 사용하지 말자. - 연산자는 큰 수를 다룰때 오버플로가 발생할 수 있고 <, > 연산자는 오류를 유발한다고 한다. (왜인지 이유는 안나와 있다...)
+2. 대신 타입들이 제공하는 compare 메서드를 사용하자
+	```
+	Short.compare(v1, v2); //기본타입인 경우
+	v1.copare(v2); //참조타입인 경우
+	```
+## Comparator
+Comparator는 간결하지만 약간의 성능저하가 있다. (책에서는 10% 정도)
+```
+Comparator<PhoneNumber> COMPARTOR = 
+	comparingInt(PhoneNumber pn) -> pn.areaCode)
+		.thenComparingInt(pn -> pn.prefix)
+		.thenComparingInt(pn -> pn.lineNum)
+
+public int compareTo(PhoneNumber pn) {
+	return COMPARATOR.compare(this, pn);
+}
+```
