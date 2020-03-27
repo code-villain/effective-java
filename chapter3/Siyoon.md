@@ -74,12 +74,19 @@ Hash류의 컬렉션을 제대로 사용하기 위해서는 hashCode를 제대�
 ## 정의
 ### comparable 인터페이스
 comparable은 하나의 메서드 compareTo를 가지고 있다. compareTo는 순서를 비교하는줄 알았는데, equals()처럼 동치성도 비교할 수 있다. (반환값이 0인 경우 겠네)
-그래서 x.compareTO(y) == 0 이라면 x.equals(y)를 만족하는 방식으로 구현하는 것이 바람직하다. (이펙티브 자바 권고사항)
+그래서 x.compareTo(y) == 0 이라면 x.equals(y)를 만족하는 방식으로 구현하는 것이 바람직하다. (이펙티브 자바 권고사항)
 
 compareTo 메서드를 제대로 선언하지 않는다면 Tree 컬렉션들과 제대로 어울리지 못한다.
 
+## compareTo 명세 규약
+(sgn()은 부호함수다 음수, 0, 양수를 -1, 0, 1로 변환한다.)
+1. 대칭성: sgn(x.compareTo(y)) == =sgn(y.compareTo(x))
+2. 추이성: x.compareTo(y) > 0 && y.compareTo(z) > 0
+3. x.compareTo(y) == 0 이면, sgn(x.compareTo(z)) == sgn(y.compareTo(z))
+4. (권고사항) x.compareTo(y) == 0이면, x.equals(y)도 참이어야 한다.
+
 ## compareTo 구현시 고려사항
-1. - , < , > 연산자를 사용하지 말자. - 연산자는 큰 수를 다룰때 오버플로가 발생할 수 있고 <, > 연산자는 오류를 유발한다고 한다. (왜인지 이유는 안나와 있다...)
+1. \- , < , > 연산자를 사용하지 말자. - 연산자는 큰 수를 다룰때 오버플로가 발생할 수 있고 <, > 연산자는 오류를 유발한다고 한다. (왜인지 이유는 안나와 있다...)
 2. 대신 타입들이 제공하는 compare 메서드를 사용하자
 	```
 	Short.compare(v1, v2); //기본타입인 경우
