@@ -29,7 +29,36 @@ EnumSet은 Set인터페이스를 완벽하게 구현하였으며, 비트 필드�
 
 그러므로 EnumSet을 사용하면 안전함과 성능을 모두 잡을 수 있다.
 
-# item37) orinal 인덱싱 대신 EnumMap을 사용하라
+# item37) ordinal 인덱싱 대신 EnumMap을 사용하라
+
+아이템 제목이 좀 구리다. (이펙티브 자바는 전체적으로 아이템 제목이 구리다..)
+좀 더 설명을 붙이자면, 'Enum으로 그룹핑 하고 싶을때는 ordinal 인덱싱 대신 EnumMap을 사용하라'
+
+## 정의
+### ordinal 인덱싱?
+이넘으로 그룹핑할때 이넘들의 ordinal() 번호를 이용하여서 인덱스로 그룹핑하는 방식을 말한다.
+
+## 장점
+EnumMap을 사용하면
+1. 코드가 명료해진다. (가독성)
+2. 안전해진다. (ordinal 인덱스는 변할 수 있다.)
+3. 내부적으로 배열을 사용하고 있어서 성능도 좋다. (ordinal 인덱싱을 배열대신 리스트로 만들더라도 비검사 형변환 경고는 안뜨겠지만 성능은 느릴 것이다.)
+
+### stream을 사용하여서 map으로 간단히 매핑시키기
+
+1. 간단하지만 내부적으로 이넘맵을 사용하지 않는다.
+```
+Map<MyEnum, MyClass> collet = Arrays.stream(myClass)
+ .collect(groupingBy(c -> c.myEnum));
+```
+
+2. 만약 이넘맵으로 명시하고 싶다면
+```
+Map<MyEnum, MyClass> collet = Arrays.stream(myClass)
+.collect(groupingBy(c -> c.myEnum, () -> new EnumMap<>(MyEnum.class), toSet()));
+```
+이런식으로 Map 구현체와, 밸류들을 묶을 컬렉션의 타입을 지정할 수 있다.
+
 
 # item38) 확장할 수 있는 열거타입이 필요하면 인터페이스를 사용하라.
 
