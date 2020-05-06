@@ -75,3 +75,54 @@ Exception in thread "main" java.lang.NullPointerException: null입니다
     ```java
      public enum TemperatureScale { FAHRENHEIT, CELSIUS } 
 
+
+# item 52) 다중정의는 신중히 사용하라  
+
+## 1. 다중정의 vs 재정의
+```java
+public Class CollectionClassifier {
+    public static String Classify(Set<?> s) {
+        return "집합";
+    }
+    public static String Classify(List<?> s) {
+        return "리스트";
+    }
+    public static String Classify(Collection<?> s) {
+        return "그 외";
+    }
+    
+    public static void main(String[] args) {
+        Collection<?>[] collections = {
+            new HashSet<String>(),
+            new ArrayList<BigInteger>(),
+            new HashMap<String, String>().values()
+        };
+        for (Collection<?> c : collections)
+            System.out.println(classify(c));
+    }
+
+}
+```
+
+- 출력: "그 외" 3회 
+- 다중정의(overloading) 된 `classify()` 중 어느 메서드를 호출할지 컴파일 타임에 정해지고 컴파일 타임에 for문 안의 c 는 항상 `Collection<?>` 타입이다.
+- 재정의(overriding): 동적으로 선택
+  다중정의(overloading): 정적으로 선택
+
+## 2. 다중정의는 헷갈리니까 다른 방법을 추천한다!
+### 1) 예제 수정
+```java
+public static String classify(Collection<?> c) {
+    return c instanceof Set ? "집합" :
+            c instanceof List ? "리스트" : "그 외";
+}
+```
+
+### 2) 다중정의가 혼동을 일으키는 상황을 피해야 한다.
+    - 매개변수 수가 같은 다중정의는 만들지 말자.
+
+### 3) 다중정의하는 대신 메서드 이름을 다르게 지어주는 방법
+- `class ObjectOutputStream`  
+    - 메서드마다 다른 이름 writeBoolean(), writeInt(), writeLong()
+    - read 메서드와 짝 readBoolean(), readInt(), readLong()
+
