@@ -126,3 +126,7 @@ public static String classify(Collection<?> c) {
     - 메서드마다 다른 이름 writeBoolean(), writeInt(), writeLong()
     - read 메서드와 짝 readBoolean(), readInt(), readLong()
 
+# item 53) 가변인수는 신중히 사용하라  
+- 가변인수(varargs) 메서드는 명시한 타입의 인수를 0개 이상 받을 수 있다.
+- 인수의 개수 길이로 배열을 생성, 인수들을 배열에 저장해서 메서드에 전달
+- 성능에 민감한 상황이라면 가변인수가 걸림돌이 될 수 있다.
