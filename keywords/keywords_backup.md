@@ -1201,7 +1201,7 @@ p310 세번째는 앞서의 두 기법을 혼합한 것으로…. 모든 매개�
 ---
 <img src="https://avatars.slack-edge.com/2020-03-15/1000835949088_e3d7d263f3f166d5ec3b_48.png" width="30px"> **김규민** (2020. 5. 6. 오후 11:32:43)
 
-300p. [<http://bit.ly/2NZ1l7u|Asserts>] 를 참고 해보면 “public 메서드에서는 매개변수 checking 목적으로 assertion을 사용하지 마라(Do _not_ use assertions for argument checking in public methods). 상황에 맞는 적절한 Runtime Exception을 던져줘야 하는데(erroneous arguments should result in an appropriate runtime exception) AssertionError는 그렇지 못하기 때문이다.“라고 하는데,
+300p. [<http://bit.ly/2NZ1l7u | Asserts>] 를 참고 해보면 “public 메서드에서는 매개변수 checking 목적으로 assertion을 사용하지 마라(Do _not_ use assertions for argument checking in public methods). 상황에 맞는 적절한 Runtime Exception을 던져줘야 하는데(erroneous arguments should result in an appropriate runtime exception) AssertionError는 그렇지 못하기 때문이다.“라고 하는데,
 
 그게 왜 public 메서드에서만 허용되지 않는다는 것인지 잘 이해가 가지 않네요. 적절한 Exception이 던져져야 하는 것은 non-public 메서드에서도 마찬가지 아닌가..?
 
